@@ -1,0 +1,41 @@
+<!-- Chat main template -->
+<script type="text/ng-template" id="chat-main">
+	<div ng-show="loading">
+		<span class="throbber"></span>
+	</div>
+	<div ng-hide="loading" class="row">
+		<div class="col-md-10">
+			<div class="main-white">
+				<div class="messages" chat-autoscroll>
+					<div ng-repeat="message in messages">
+						<div chat-message message="message" members="members"></div>
+						<hr ng-if="!$last">
+					</div>
+				</div>
+				<div class="">
+					<form ng-submit="addMessage()">
+						<input type="text" ng-model="form.message" placeholder="Type a message and press enter" class="message-box">
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<div class="main-white">
+				<div class="members">
+					<p ng-repeat="member in members" ng-class="{'online': sessions[member.user.id], 'offline': !sessions[member.user.id]}">{{member.user.displayName || member.user.username}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<!-- Chat message template -->
+<script type="text/ng-template" id="chat-message">
+	<div class="message-left">
+		<img ng-src="{{member.user.settings.avatarUrl}}" alt="{{member.user.displayName || member.user.username || member.user.email}}" class="avatar avatar-small">
+	</div>
+	<div class="message-right">
+		<p>{{member.user.displayName || member.user.username || member.user.email}} <span class="message-time">{{message.timestamp | date:'shortTime' || ''}}</span></p>
+		<p>{{message.text}}</p>
+	</div>
+</script>

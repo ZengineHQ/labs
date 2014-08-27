@@ -1,0 +1,39 @@
+/**
+ * We are using just a few CSS rules to customize the plugin look.
+ * This is because most of the layout is using the Zengine Patterns.
+ */
+
+.offline {
+	color: #ccc;
+}
+
+.online {
+	color: #000;
+	
+}
+
+.messages {
+	overflow:scroll;
+	height:500px;
+	padding-right: 15px;
+}
+
+.members {
+	overflow:scroll;
+	height:550px;
+}
+
+.message-time {
+	color: #ccc;
+}
+
+.message-box {
+	margin-top: 10px;
+	width:97%;
+	padding:10px;
+}
+
+.message-left {
+	width: 40px;
+	float: left;
+}
