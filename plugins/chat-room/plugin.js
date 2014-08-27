@@ -70,7 +70,7 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 	/**
 	 * Get all members in a workspace
 	 *
-	 * equivalent to: GET https://api.wizehive.com/v1/workspaces/{workspaceId}/members
+	 * equivalent to: GET https://api.zenginehq.com/v1/workspaces/{workspaceId}/members
 	 */
 	znData('WorkspaceMembers').query(
 		// Params
@@ -90,7 +90,7 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 	/**
 	 * Get plugin data
 	 *
-	 * equivalent to: GET https://api.wizehive.com/v1/plugins/?namespace=chat
+	 * equivalent to: GET https://api.zenginehq.com/v1/plugins/?namespace=chat
 	 */
 	znData('Plugins').get(
 		// Params
@@ -112,9 +112,9 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 	);
 
 	/**
-	 * Get current logged user in Wizehive
+	 * Get currently logged-in user in Zengine
 	 *
-	 * equivalent to: GET https://api.wizehive.com/v1/users/me
+	 * equivalent to: GET https://api.zenginehq.com/v1/users/me
 	 */
 	znData('Users').get(
 		// Params
