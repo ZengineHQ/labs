@@ -35,7 +35,7 @@
 		<img ng-src="{{member.user.settings.avatarUrl}}" alt="{{member.user.displayName || member.user.username || member.user.email}}" class="avatar avatar-small">
 	</div>
 	<div class="message-right">
-		<p>{{member.user.displayName || member.user.username || member.user.email}} <span class="message-time">{{message.timestamp | date:'shortTime' || ''}}</span></p>
+		<p>{{member.user.displayName || member.user.username || member.user.email}} <span class="message-time">{{message.timestamp | date:message.dateFormat || ''}}</span></p>
 		<p>{{message.text}}</p>
 	</div>
 </script>

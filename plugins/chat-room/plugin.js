@@ -12,13 +12,13 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 	 * Connect with Firebase
 	 */
 	$scope.connect = function() {
-		
+
 		// Room reference
 		var ref = new Firebase($scope.plugin.firebaseUrl + '/rooms/' + $routeParams.workspace_id);
-		
+
 		// Authenticate user and set presence
 		ref.auth($scope.plugin.firebaseAuthToken, function(err, res) {
-			
+
 			// Set error if present and returns
 			if (err) {
 				$scope.err = err;
@@ -48,7 +48,7 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 
 			// Remove the user from the active sessions list when the plugin is closed
 			$scope.$on('$destroy', function() {
-				session.remove(); 
+				session.remove();
 			});
 
 			// Set sessions
@@ -62,15 +62,15 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 
 			// Apply changes to the scope
 			$scope.$apply();
-			
+
 		});
-		
+
 	};
 
 	/**
 	 * Get all members in a workspace
 	 *
-	 * equivalent to: GET https://stage-api.zenginehq.com/v1/workspaces/{workspaceId}/members
+	 * equivalent to: GET https://api.wizehive.com/v1/workspaces/{workspaceId}/members
 	 */
 	znData('WorkspaceMembers').query(
 		// Params
@@ -90,7 +90,7 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 	/**
 	 * Get plugin data
 	 *
-	 * equivalent to: GET https://stage-api.zenginehq.com/v1/plugins/?namespace=chat
+	 * equivalent to: GET https://api.wizehive.com/v1/plugins/?namespace=chat
 	 */
 	znData('Plugins').get(
 		// Params
@@ -112,9 +112,9 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 	);
 
 	/**
-	 * Get current logged user in Zengine
+	 * Get current logged user in Wizehive
 	 *
-	 * equivalent to: GET https://stage-api.zenginehq.com/v1/users/me
+	 * equivalent to: GET https://api.wizehive.com/v1/users/me
 	 */
 	znData('Users').get(
 		// Params
@@ -134,7 +134,7 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 	/**
 	 * Wait for members, plugin and current user data to be loaded before connect with Firebase
 	 */
-	var unbindInitalDataFetch = $scope.$watchCollection('[members, plugin, me]', function() {
+	var unbindInitialDataFetch = $scope.$watchCollection('[members, plugin, me]', function() {
 
 		// If there is an err in the scope:
 		// 1. Change the state of the loading indicator to false
@@ -142,7 +142,7 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 		// 3. Return (the plugin.html should contain logic to show the error message)
 		if ($scope.err) {
 			$scope.loading = false;
-			unbindInitalDataFetch();
+			unbindInitialDataFetch();
 			return;
 		}
 
@@ -150,17 +150,17 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 		// 1. Remove the watcher
 		// 2. Call `$scope.connect` to connect with Firebase
 		if ($scope.members !== undefined && $scope.plugin !== undefined && $scope.me !== undefined) {
-			unbindInitalDataFetch();
+			unbindInitialDataFetch();
 			$scope.connect();
 		}
-		
+
 	});
 
 	/**
 	 * Add a new message
 	 */
 	$scope.addMessage = function() {
-		
+
 		if (!$scope.form || !$scope.form.message) {
 			return;
 		}
@@ -172,9 +172,9 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 		});
 
 		$scope.form.message = null;
-		
+
 	};
-	
+
 }])
 
 
@@ -198,6 +198,13 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 						scope.member = member;
 					}
 				});
+				var now = new Date();
+				var startOfDay = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()).getTime();
+				if (scope.message.timestamp > startOfDay) {
+					scope.message.dateFormat = 'shortTime';
+				} else {
+					scope.message.dateFormat = 'short';
+				}
 				unbind();
 				scope.$emit('chatAutoscroll');
 			});
@@ -219,7 +226,7 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 		}
 	};
 }])
- 
+
 /**
  * Registration Settings
  */
