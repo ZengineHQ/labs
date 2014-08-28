@@ -1,0 +1,44 @@
+<script type="text/ng-template" id="record-board-main">
+
+	<!-- form tabs -->
+	<div>
+		<ul class="tabs">
+			<li ng-repeat="form in forms" ng-class="{active: formId == form.id}">
+				<a href="#" ng-click="pickForm(form.id)">
+					{{form.name}}
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<!-- Board Canvas -->
+	<div class="wrapper">
+
+		<!-- Folder Column -->
+		<div ng-repeat="folder in folders" class="column">
+			<!-- Display Folder Name -->
+			<div class="name">{{folder.name}}</div>
+
+			<!-- Folder Records List -->
+			<ul class="record-list" ui-sortable="sortableOptions" ng-model="folderRecords[folder.id]">
+				<li ng-repeat="record in folderRecords[folder.id]" data-id="{{record.id}}" class="record">
+					{{record.name}}
+				</li>
+			</ul>
+		</div>
+
+		<!-- Add Folder Column -->
+		<div ng-show="formId" class="column">
+			<!-- Folder Name -->
+			<div class="control-group">
+				<input type="text" ng-model="addFolderName" placeholder="New Folder Name" class="input-large">
+			</div>
+			<!-- Add Folder Actions -->
+			<div class="form-actions">
+				<a href="#" ng-click="addFolder()" class="btn btn-primary">Add</a>
+			</div>
+		</div>
+
+	</div>
+
+</script>
