@@ -3,12 +3,13 @@
 	<!-- form tabs -->
 	<div>
 		<ul class="tabs">
-			<li ng-repeat="form in forms" ng-class="{active: formId == form.id}">
-				<a href="#" ng-click="pickForm(form.id)">
-					{{form.name}}
-				</a>
-			</li>
+			<li ng-repeat="form in forms" ng-class="{active: formId == form.id}"><a href="#" ng-click="pickForm(form.id)">{{form.name}}</a></li>
 		</ul>
+	</div>
+
+	<!-- Header Actions -->
+	<div ng-show="formId">
+		<span class="btn" ng-click="openAddFolder(true)"><i class="icon-plus"></i> Add Folder</span>
 	</div>
 
 	<!-- Board Canvas -->
@@ -17,18 +18,29 @@
 		<!-- Folder Column -->
 		<div ng-repeat="folder in folders" class="column">
 			<!-- Display Folder Name -->
-			<div class="name">{{folder.name}}</div>
+			<div class="name" ng-hide="editFolder.id==folder.id">
+				<span ng-show="folder.id==0">{{folder.name}}</span>
+				<a href="#" ng-click="toggleEditFolder(folder.id)" ng-show="folder.id!=0">{{folder.name}}</a>
+			</div>
+			<!-- Edit Folder Name -->
+			<div ng-show="editFolder.id==folder.id">
+				<div class="control-group">
+					<input type="text" ng-model="editFolder.name" class="input-large">
+				</div>
+				<div class="form-actions">
+					<a href="#" ng-click="saveFolder()" class="btn btn-primary">Save</a>
+					<a href="#" ng-click="toggleEditFolder(folder.id)" class="secondary">Cancel</a>
+				</div>
+			</div>
 
 			<!-- Folder Records List -->
-			<ul class="record-list" ui-sortable="sortableOptions" ng-model="folderRecords[folder.id]">
-				<li ng-repeat="record in folderRecords[folder.id]" data-id="{{record.id}}" class="record">
-					{{record.name}}
-				</li>
+			<ul id="{{folder.id}}" data-id="{{folder.id}}" ui-sortable="sortableOptions" ng-model="folderRecords[folder.id]" class="records-container">
+				<li data-id="{{record.id}}" ng-repeat="record in folderRecords[folder.id]" class="record">{{record.name}}</li>
 			</ul>
 		</div>
 
 		<!-- Add Folder Column -->
-		<div ng-show="formId" class="column">
+		<div ng-show="showAddFolder" class="column">
 			<!-- Folder Name -->
 			<div class="control-group">
 				<input type="text" ng-model="addFolderName" placeholder="New Folder Name" class="input-large">
@@ -36,6 +48,7 @@
 			<!-- Add Folder Actions -->
 			<div class="form-actions">
 				<a href="#" ng-click="addFolder()" class="btn btn-primary">Add</a>
+				<a href="#" ng-click="openAddFolder(false)" class="secondary">Cancel</a>
 			</div>
 		</div>
 
