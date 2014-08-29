@@ -1,7 +1,7 @@
 /**
  * Plugin Record Board Controller
  */
-plugin.controller('recordBoardCntl', ['$scope', '$routeParams', 'znData', 'znMessage', function ($scope, $routeParams, znData, znMessage) {
+plugin.controller('namespacedRecordBoardCntl', ['$scope', '$routeParams', 'znData', 'znMessage', function ($scope, $routeParams, znData, znMessage) {
 
 	// Current Workspace ID from Route
 	$scope.workspaceId = null;
@@ -63,8 +63,13 @@ plugin.controller('recordBoardCntl', ['$scope', '$routeParams', 'znData', 'znMes
 		// Reset Workspace Forms
 		$scope.forms = [];
 
+		var params = {
+			workspace: { id: $scope.workspaceId },
+			related: 'folders'
+		};
+
 		// Query Forms by Workspae ID and Return Loading Promise
-		return znData('Forms').query({workspace: { id: $scope.workspaceId }, related: 'folders'}).then(function(response){
+		return znData('Forms').query(params).then(function(response){
 			// Set Workspace Forms from Response
 			$scope.forms = response;
 		});
@@ -79,15 +84,23 @@ plugin.controller('recordBoardCntl', ['$scope', '$routeParams', 'znData', 'znMes
 
 		var queue = [];
 
+		var params = {
+			formId: $scope.formId,
+			folder: {
+				id: folder.id
+			}
+		};
+
 		// Get Records by Folder
 		angular.forEach($scope.folders, function(folder) {
 			// Initialize Folder Record List
 			$scope.folderRecords[folder.id] = [];
 
 			// Query and Index Records by Folder
-			var request = znData('FormRecords').query({formId: $scope.formId, folder: { id: folder.id }}).then(function(response){
-				$scope.folderRecords[folder.id] = response;
-			});
+			var request = znData('FormRecords').query(params).then(function(response) {
+					$scope.folderRecords[folder.id] = response;
+				}
+			);
 
 			queue.push(request);
 		});
@@ -127,6 +140,11 @@ plugin.controller('recordBoardCntl', ['$scope', '$routeParams', 'znData', 'znMes
 	 * Add Folder
 	 */
 	$scope.addFolder = function() {
+
+		var params = {
+			formId: $scope.formId
+		};
+
 		var data = {
 			name: $scope.addFolderName,
 			form: {
@@ -135,7 +153,7 @@ plugin.controller('recordBoardCntl', ['$scope', '$routeParams', 'znData', 'znMes
 		};
 
 		// Save New Folder
-		return znData('FormFolders').save({formId: $scope.formId}, data, function (folder) {
+		return znData('FormFolders').save(params, data, function (folder) {
 			// Close Add Column
 			$scope.openAddFolder(false);
 
@@ -178,6 +196,11 @@ plugin.controller('recordBoardCntl', ['$scope', '$routeParams', 'znData', 'znMes
 	 */
 	$scope.saveFolder = function() {
 
+		var params = {
+			formId: $scope.formId,
+			id: $scope.editFolder.id
+		};
+
 		var data = {
 			name: $scope.editFolder.name,
 			form: {
@@ -186,7 +209,7 @@ plugin.controller('recordBoardCntl', ['$scope', '$routeParams', 'znData', 'znMes
 		};
 
 		// Save Folder
-		return znData('FormFolders').save({formId: $scope.formId, id: $scope.editFolder.id}, data, function (response) {
+		return znData('FormFolders').save(params, data, function (response) {
 			// Update Folder in Folders List
 			angular.forEach($scope.folders, function(folder, index)  {
 				if (folder.id == $scope.editFolder.id) {
@@ -199,7 +222,7 @@ plugin.controller('recordBoardCntl', ['$scope', '$routeParams', 'znData', 'znMes
 
 			return response;
 		}, function (e) {
-			znMessage('Error saving folder', 'error');
+				znMessage('Error saving folder', 'error');
 		});
 
 	};
@@ -221,10 +244,10 @@ plugin.controller('recordBoardCntl', ['$scope', '$routeParams', 'znData', 'znMes
 /**
  * Plugin Registration
  */
-.register('recordBoard', {
-	route: '/recordboard',
-	controller: 'recordBoardCntl',
-	template: 'record-board-main',
+.register('namespacedRecordBoard', {
+	route: '/namespacedrecordboard',
+	controller: 'namespacedRecordBoardCntl',
+	template: 'namespaced-record-board-main',
 	title: 'Record Board',
 	pageTitle: false,
 	fullPage: true,

@@ -1,9 +1,11 @@
-<script type="text/ng-template" id="record-board-main">
+<script type="text/ng-template" id="namespaced-record-board-main">
 
 	<!-- form tabs -->
 	<div>
 		<ul class="tabs">
-			<li ng-repeat="form in forms" ng-class="{active: formId == form.id}"><a href="#" ng-click="pickForm(form.id)">{{form.name}}</a></li>
+			<li ng-repeat="form in forms" ng-class="{active: formId == form.id}">
+				<a href="#" ng-click="pickForm(form.id)">{{form.name}}</a>
+			</li>
 		</ul>
 	</div>
 
