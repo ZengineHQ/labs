@@ -90,12 +90,12 @@ plugin.controller('namespacedChatCntl', ['$scope', '$routeParams', 'znData', '$f
 	/**
 	 * Get plugin data
 	 *
-	 * equivalent to: GET https://api.zenginehq.com/v1/plugins/?namespace=chat
+	 * equivalent to: GET https://api.zenginehq.com/v1/plugins/?namespace=namespaced
 	 */
 	znData('Plugins').get(
 		// Params
 		{
-			namespace: 'chat'
+			namespace: 'namespaced'
 		},
 		// Success
 		function(resp) {
