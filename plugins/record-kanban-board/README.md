@@ -5,5 +5,7 @@ The idea behind the Record Board plugin is to offer a different visualization an
 ![Record Board Plugin](https://zenginehq.github.io/developers-stage/img/plugins/tutorials/record-board-part2.png)
 
 ## Installation
-Create a plugin with a name and namespace. Find and replace the word 'namespaced' with your new namespace, and copy and paste the updated contents of each file into their respective places in the plugin editor of the Zengine developer tool.
+1. Create a plugin with a name and namespace.
+2. Find and replace the word 'namespaced' with your new namespace.
+3. Copy and paste the updated contents of each file into their respective places in the plugin editor of the Zengine developer tool.
 
