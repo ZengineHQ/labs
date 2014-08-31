@@ -1,5 +1,5 @@
 <!-- Chat main template -->
-<script type="text/ng-template" id="chat-main">
+<script type="text/ng-template" id="namespaced-chat-main">
 	<div ng-show="loading">
 		<span class="throbber"></span>
 	</div>
@@ -30,7 +30,7 @@
 </script>
 
 <!-- Chat message template -->
-<script type="text/ng-template" id="chat-message">
+<script type="text/ng-template" id="namespaced-chat-message">
 	<div class="message-left">
 		<img ng-src="{{member.user.settings.avatarUrl}}" alt="{{member.user.displayName || member.user.username || member.user.email}}" class="avatar avatar-small">
 	</div>

@@ -1,7 +1,7 @@
 /**
  * Chat Controller
  */
-plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', function ($scope, $routeParams, znData, $firebase) {
+plugin.controller('namespacedChatCntl', ['$scope', '$routeParams', 'znData', '$firebase', function ($scope, $routeParams, znData, $firebase) {
 
 	/**
 	 * Load indicator
@@ -90,12 +90,12 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 	/**
 	 * Get plugin data
 	 *
-	 * equivalent to: GET https://api.zenginehq.com/v1/plugins/?namespace=chat
+	 * equivalent to: GET https://api.zenginehq.com/v1/plugins/?namespace=namespaced
 	 */
 	znData('Plugins').get(
 		// Params
 		{
-			namespace: 'chat'
+			namespace: 'namespaced'
 		},
 		// Success
 		function(resp) {
@@ -181,13 +181,13 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 /**
  * Messages Directive
  */
-.directive('chatMessage', [function() {
+.directive('namespacedChatMessage', [function() {
 	return {
 		scope: {
 			message: '=',
 			members: '='
 		},
-		templateUrl: 'chat-message',
+		templateUrl: 'namespaced-chat-message',
 		link: function postLink(scope, element, attrs) {
 			var unbind = scope.$watch('members', function(members) {
 				if (!members) {
@@ -215,7 +215,7 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 /**
  * Autoscroll Directive
  */
-.directive('chatAutoscroll', ['$timeout', function($timeout) {
+.directive('namespacedChatAutoscroll', ['$timeout', function($timeout) {
 	return {
 		link: function postLink(scope, element, attrs) {
 			scope.$on('chatAutoscroll', function() {
@@ -230,10 +230,10 @@ plugin.controller('chatCntl', ['$scope', '$routeParams', 'znData', '$firebase', 
 /**
  * Registration Settings
  */
-.register('chat', {
-	route: '/chat',
-	controller: 'chatCntl',
-	template: 'chat-main',
+.register('namespacedchat', {
+	route: '/namespacedchat',
+	controller: 'namespacedChatCntl',
+	template: 'namespaced-chat-main',
 	title: 'Chat',
 	pageTitle: false,
 	fullPage: true,

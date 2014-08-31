@@ -1,29 +1,40 @@
+/**
+ * Plugin Record Board CSS
+ */
+
+.title {
+    color: purple;
+}
 .column {
-	float: left;
-	width: 200px;
-	background-color: #fff;
-	box-shadow: 0px 2px 2px rgba(136, 136, 136, 0.43);
-	padding: 5px;
-	margin: 0px 10px 20px 0px;
+    float: left;
+    width: 200px;
+    background-color: #fff;
+    box-shadow: 0px 2px 2px rgba(136, 136, 136, 0.43);
+    padding: 5px;
+    margin: 0px 10px 20px 0px;
 }
 
 .column li {
-	background-color: #fff;
-	padding: 10px 5px 10px 5px;
-	margin: 10px 0px 10px 0px;
-	border: 1px solid #e3e3e3;
-	border-radius: 3px;
+    background-color: #fff;
+    padding: 10px 5px 10px 5px;
+    margin: 10px 0px 10px 0px;
+    border: 1px solid #e3e3e3;
+    border-radius: 3px;
 }
 
 .column .name {
-	font-weight: bold;
+    font-weight: bold;
 }
 
-.record-list {
-	min-height: 15px;
+.column ul {
+    min-height: 30px;
+}
+
+.record {
+    cursor: move;
 }
 
 .wrapper {
-	width: 100%;
-	margin-top: 10px;
+    width: 100%;
+    margin-top: 10px;
 }
