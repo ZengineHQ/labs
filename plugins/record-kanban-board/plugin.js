@@ -245,7 +245,7 @@ plugin.controller('namespacedRecordBoardCntl', ['$scope', '$routeParams', 'znDat
  * Plugin Registration
  */
 .register('namespacedRecordBoard', {
-	route: '/namespacedrecordboard',
+	route: '/namespaced',
 	controller: 'namespacedRecordBoardCntl',
 	template: 'namespaced-record-board-main',
 	title: 'Record Board',
