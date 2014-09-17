@@ -1,0 +1,33 @@
+<script type="text/ng-template" id="namespaced-main">
+	<div class="row">
+	    <div class="col-md-8">
+	        <h1>Today we're ordering from...</h1>
+	        <h2>{{foodJoint.name}}</h2>
+	        <div ng-show="foodJoint.name" class="well">
+	            What do you want?
+	            <form ng-submit="submitOrder()"><input ng-model="newOrder.order" class="input-xxlarge" /></form>
+	            <ul class="ul">
+	                <li ng-repeat="order in orders">{{order.order}} <span class="label">{{order.email}}</span></li>
+	            </ul>
+	        </div>
+	    </div>
+	    <div class="col-md-4">
+	        <a href="#" ng-click="changeFoodJoint()" class="btn btn-primary">Pick Today's Food Joint</a>
+	        <div ng-show="modifying" class="well">
+	            <div ng-show="modifying.chooseForm">
+	                <h3>Choose your form</h3>
+	                <ul>
+	                    <li ng-repeat="form in forms"><h4><a href="#" ng-click="chooseForm(form.id)">{{form.name}}</a></h4></li>
+	                </ul>
+	            </div>
+	            <div ng-show="modifying.chooseFoodJoint">
+	                <h3>Choose your food joint</h3>
+	                <ul>
+	                    <li ng-repeat="foodJoint in foodJoints"><h4><a href="#" ng-click="chooseFoodJoint(foodJoint.name)">{{foodJoint.name}}</a></h4></li>
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</script>
+
