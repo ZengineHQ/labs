@@ -9,7 +9,7 @@ plugin.controller('namespacedCntl', ['$scope', '$firebase', 'znData', '$routePar
     
     fbRecordObj.$bindTo($scope, 'foodJoint');
     
-    var fbOrdersRef = new Firebase(''__INSERT FIREBASE URL HERE__/orders/' + $routeParams.workspace_id);
+    var fbOrdersRef = new Firebase('__INSERT FIREBASE URL HERE__/orders/' + $routeParams.workspace_id);
     var fbOrders = $firebase(fbOrdersRef);
     
     $scope.orders = fbOrders.$asObject();
