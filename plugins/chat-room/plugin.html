@@ -6,9 +6,9 @@
 	<div ng-hide="loading" class="row">
 		<div class="col-md-10">
 			<div class="main-white">
-				<div class="messages" chat-autoscroll>
+				<div class="messages" namespaced-chat-autoscroll>
 					<div ng-repeat="message in messages">
-						<div chat-message message="message" members="members"></div>
+						<div namespaced-chat-message message="message" members="members"></div>
 						<hr ng-if="!$last">
 					</div>
 				</div>
