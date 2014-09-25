@@ -1,0 +1,78 @@
+<!-- Primary template -->
+<script type="text/ng-template" id="today-summary-main">
+	<div class="dropdown">
+    	<a class="topnav-section-link" data-toggle="dropdown" ng-click="update()" href="javascript:void(0)">
+    		<i class="icon-th-list"></i>
+    	</a>
+    	<div id="today-summary-menu" class="dropdown-menu" role="menu">
+            <span class="throbber" ng-show="loading"></span>
+            <h2>Today's Tasks</h2>
+    	    <ul class="list condensed">
+                <li ng-repeat="task in tasks" ng-include src="'today-summary-task'"></li>
+            </ul>
+    		<h3 ng-hide="tasks.length">No tasks.</h3>
+    		
+    		<br />
+    		
+    		<h2>Today's Events</h2>
+    		<ul class="list condensed">
+    		    <li ng-repeat="event in events" ng-include src="'today-summary-event'"></li>
+    		</ul>
+            <h3 ng-hide="events.length">No events.</h3>
+    	</div>
+    </div>
+</script>
+
+<!-- Template for each task -->
+<script type="text/ng-template" id="today-summary-task">
+	<div class="list-item-wrapper" ng-click="task.showDetail = !task.showDetail">
+		<div class="list-item-info-wrapper">
+			<div class="list-item-headline">
+				<span class="headline">{{task.task}}</span>
+				<span class="pill pill-primary priority">Priority {{task.priority}}</span>
+			</div>
+			<div class="list-item-subline">
+				<span class="subline">
+					<span class="record" ng-show="task.record">{{task.record.name}} | </span>
+					<span>{{task.status | todaySummaryStatus}}</span>
+				</span>
+			</div>
+			<div class="list-item-right-block">
+				<div class="list-item-right-icon">
+					<i class="icon-check"></i>
+				</div>
+			</div>
+		</div>
+    </div>
+    <div class="well detail" ng-show="task.showDetail">
+		<div ng-show="task.body">{{task.body}}</div>
+		<div ng-hide="task.body">[No details provided]</div>
+    </div>
+</script>
+
+<!-- Template for each event -->
+<script type="text/ng-template" id="today-summary-event">
+    <div class="list-item-wrapper" ng-click="event.showDetail = !event.showDetail">
+		<div class="list-item-info-wrapper">
+			<div class="list-item-headline">
+				<span class="headline">{{event.event}}</span>
+			</div>
+			<div class="list-item-subline">
+				<span class="subline">
+					<span class="record" ng-show="event.record">{{event.record.name}} | </span>
+					<span>{{event.start | date:'short'}} - {{event.end | date:'short'}}</span>
+				</span>
+			</div>
+			<div class="list-item-right-block">
+				<div class="list-item-right-icon">
+					<i class="icon-calendar"></i>
+				</div>
+			</div>
+		</div>
+    </div>
+    <div class="well detail" ng-show="event.showDetail">
+		<div ng-show="event.body">{{event.body}}</div>
+		<div ng-hide="event.body">[No details provided]</div>
+    </div>
+</script>
+
