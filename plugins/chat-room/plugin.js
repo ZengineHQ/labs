@@ -231,7 +231,7 @@ plugin.controller('namespacedChatCntl', ['$scope', '$routeParams', 'znData', '$f
  * Registration Settings
  */
 .register('namespacedchat', {
-	route: '/namespacedchat',
+	route: '/namespaced',
 	controller: 'namespacedChatCntl',
 	template: 'namespaced-chat-main',
 	title: 'Chat',
