@@ -91,7 +91,7 @@ plugin.controller('todaySummaryCntl', ['$scope', 'znData', '$routeParams', '$q',
 	 * Current local date, yyyy-MM-dd string
 	 */
 	function getCurrentDate() {
-		return new Date().toString('yyyy-MM-dd');
+		return moment().format("YYYY-MM-DD");
 	}
 
 	// Stop click event propagation - keeps the menu open on internal clicks
