@@ -1,0 +1,16 @@
+{
+  "rules": {
+    "$workspace": {
+      ".write": "auth.workspaces[$workspace] === 'admin' ||
+                  auth.workspaces[$workspace] === 'owner'",
+      "settings": {
+        ".read": "auth.workspaces[$workspace] === 'admin' ||
+                  auth.workspaces[$workspace] === 'owner' ||
+                  auth.workspaces[$workspace] === 'server'"
+      },
+      "secrets": {
+        ".read": "auth.workspaces[$workspace] === 'server'"
+      }
+    }
+  }
+}

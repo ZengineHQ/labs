@@ -1,0 +1,83 @@
+<script id='namespaced-record-sms-settings' type='text/ng-template'>
+	<div class="col-md-6 panel-white">
+		<div ng-show='loading'><span class="throbber"></span></div>
+		<form class="form" name="pluginSettings" ng-submit="save()" ng-show='!loading'>
+			<h2><i class="icon-zengine"></i> Record Settings</h2>
+			<div class="control-group">
+				<label for="form-label" class="form-label">Form</label>
+				<div class="controls">
+					<select ng-model="settings.webhook.form.id" name="formId" class="input-xxlarge" ng-options="form.id as form.name for form in forms"
+						ng-change="resetFilter()">
+						<option value=""></option>
+					</select>
+					<a href="javascript:void(0)" class="btn btn-small" 
+						ng-click="openFiltersPanel()" ng-disabled="!settings.webhook.form.id" 
+						tooltip="Filter" tooltip-placement="right">
+						<i class="icon-filter"></i>
+						<span ng-show="filterCount">&nbsp;</span>
+						<span class="badge badge-primary ng-binding" ng-show="filterCount">
+							
+						</span>
+					</a>
+				</div>
+			</div>
+			<hr/>
+			<h2>
+				<i class="icon-login"></i> Twillio Credentials
+			</h2>
+			<div class="control-group">
+				<label for="form-label" class="form-label">Account SID</label>
+				<div class="controls">
+					<input ng-model="settings.twillio.accountSid" type="text" class="input-xxlarge">
+					<span class="help-block">
+						Log into your Twilio account and go to 
+						<a target="_blank" href="https://www.twilio.com/user/account/settings">
+							https://www.twilio.com/user/account/settings
+						</a>
+					</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<label for="form-label" class="form-label">Auth Token</label>
+				<div class="controls">
+					<input type="text" ng-model="secrets.twillioAuthToken" class="input-xxlarge">
+					<span class="help-block">
+						Once submitted, your Twillio Auth Token 
+						will be stored but not visible.
+						You can use this input to edit it at any time.
+					</span>
+				</div>
+			</div>
+			<h2>
+				<i class="icon-mobile"></i> SMS Settings
+			</h2>
+			<div class="control-group">
+				<label for="form-label" class="form-label">To Number</label>
+				<div class="controls">
+					<input type="text" name="to-phone-number" class="input-xxlarge"
+						ng-model="settings.sms.to"
+						ng-required="true" ng-pattern="/^\+?[0-9-()\s]+$/">
+					<span class="help-inline required">required</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<label for="form-label" class="form-label">From Number</label>
+				<div class="controls">
+					<input type="text" name="from-phone-number" class="input-xxlarge"
+						ng-model="settings.sms.from" ng-required="true">
+					<span class="help-inline required">required</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<label for="form-label" class="form-label">Message</label>
+				<div class="controls">
+					<textarea ng-model="settings.sms.body" name="body" class="input-xxlarge"/>
+				</div>
+			</div>
+			<hr/>
+			<div class="form-actions">
+				<input type="submit" class="btn btn-primary" ng-disabled="pluginSettings.$invalid" value="Save">
+			</div>
+		</form>
+	</div>
+</script>
